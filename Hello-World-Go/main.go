@@ -1,10 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"myApp/doctor"
+)
 
 func main() {
-	fmt.Println("Hello World")
-	fmt.Print("This is some text")
-	fmt.Print("This is some text")
-
+	var whatToSay string
+	whatToSay = doctor.Intro()
+	// whatToSay := "Hellow world as an argument" //shorthand to infer type
+	// sayHelloWorld(whatToSay)
+	fmt.Println(whatToSay)
 }
+
+// func sayHelloWorld(whatToSay string) {
+// 	fmt.Println(whatToSay)
+// }

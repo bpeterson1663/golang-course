@@ -1,3 +1,3 @@
-module example.com/Hello-World-Go
+module myApp
 
 go 1.16
