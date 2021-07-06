@@ -1,3 +1,6 @@
+// Build main as an executable - go build -o eliza main.og
+// eliza is the name of the file
+
 package main
 
 import (
