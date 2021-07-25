@@ -36,6 +36,7 @@ func main() {
 	fmt.Printf("My new car is a %d %s %s", myCar.Year, myCar.Make, myCar.Model)
 	pointers()
 	slices()
+	maps()
 }
 
 func pointers() {
@@ -82,4 +83,25 @@ func deleteFromSlice(a []string, i int) []string {
 	a[len(a)-1] = ""
 	a = a[:len(a)-1]
 	return a
+}
+
+func maps() {
+	intMap := make(map[string]int)
+
+	intMap["one"] = 1
+	intMap["two"] = 2
+	intMap["three"] = 3
+	intMap["four"] = 4
+	intMap["five"] = 5
+
+	for key, value := range intMap {
+		fmt.Println(key, value)
+	}
+
+	el, ok := intMap["four"]
+	if ok {
+		fmt.Println(el, "is in map")
+	} else {
+		fmt.Println(el, "is not in map")
+	}
 }
