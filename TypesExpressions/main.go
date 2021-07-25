@@ -37,6 +37,11 @@ func main() {
 	pointers()
 	slices()
 	maps()
+
+	var dog Animal
+	dog.Name = "dog"
+	dog.Sound = "woof"
+	dog.says()
 }
 
 func pointers() {
@@ -104,4 +109,14 @@ func maps() {
 	} else {
 		fmt.Println(el, "is not in map")
 	}
+}
+
+type Animal struct {
+	Name         string
+	Sound        string
+	NumberOfLegs int
+}
+
+func (a *Animal) says() { //a is called an reciever. Way to add a function to type
+	fmt.Printf("A %s says %s", a.Name, a.Sound)
 }
