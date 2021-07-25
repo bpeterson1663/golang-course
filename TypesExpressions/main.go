@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"sort"
+
+	"github.com/eiannone/keyboard"
 )
 
 type Car struct {
@@ -14,10 +16,18 @@ type Car struct {
 	Year          int
 }
 
+var keyPressChan chan rune
+
 func main() {
+	keyPressChan = make(chan rune)
+	go listenForKeyPress()
+	fmt.Println("Press any key, or q to quit")
+	_ = keyboard.Open()
+	defer func() {
+		keyboard.Close()
+	}()
 
 	//declares an array
-
 	var myStrings [3]string
 
 	myStrings[0] = "cat"
@@ -42,6 +52,13 @@ func main() {
 	dog.Name = "dog"
 	dog.Sound = "woof"
 	dog.says()
+	for {
+		char, _, _ := keyboard.GetSingleKey()
+		if char == 'q' || char == 'Q' {
+			break
+		}
+		keyPressChan <- char //send infor to a channel
+	}
 }
 
 func pointers() {
@@ -119,4 +136,11 @@ type Animal struct {
 
 func (a *Animal) says() { //a is called an reciever. Way to add a function to type
 	fmt.Printf("A %s says %s", a.Name, a.Sound)
+}
+
+func listenForKeyPress() {
+	for {
+		key := <-keyPressChan //receive info into a channel
+		fmt.Println("you pressed", string(key))
+	}
 }
