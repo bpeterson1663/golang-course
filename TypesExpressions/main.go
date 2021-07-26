@@ -59,6 +59,8 @@ func main() {
 		}
 		keyPressChan <- char //send infor to a channel
 	}
+
+	interfaces()
 }
 
 func pointers() {
@@ -143,4 +145,52 @@ func listenForKeyPress() {
 		key := <-keyPressChan //receive info into a channel
 		fmt.Println("you pressed", string(key))
 	}
+}
+
+type Dog struct {
+	Name         string
+	Sound        string
+	NumberOfLegs int
+}
+
+type Cat struct {
+	Name         string
+	Sound        string
+	NumberOfLegs int
+	HasTail      bool
+}
+
+type AnimalInterface interface {
+	Says() string
+	HowManyLegs() int
+}
+
+func (d *Dog) Says() string {
+	return d.Sound
+}
+
+func (d *Dog) HowManyLegs() int {
+	return d.NumberOfLegs
+}
+
+func (c *Cat) Says() string {
+	return c.Sound
+}
+
+func (c *Cat) HowManyLegs() int {
+	return c.NumberOfLegs
+}
+func interfaces() {
+	dog := Dog{
+		Name:         "dog",
+		Sound:        "woof",
+		NumberOfLegs: 4,
+	}
+
+	fmt.Println(dog)
+}
+
+func riddle(a AnimalInterface) {
+	riddle := fmt.Sprintf(`This animal says "%s" and has %d legs. What animal is it?`, a.Says(), a.HowManyLegs())
+	fmt.Println(riddle)
 }
