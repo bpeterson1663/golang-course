@@ -194,3 +194,50 @@ func riddle(a AnimalInterface) {
 	riddle := fmt.Sprintf(`This animal says "%s" and has %d legs. What animal is it?`, a.Says(), a.HowManyLegs())
 	fmt.Println(riddle)
 }
+
+type Vehicle struct {
+	NumberOfWheels     int
+	NumberOfPassengers int
+}
+
+type CarComposition struct {
+	Make       string
+	Model      string
+	Year       int
+	IsElectric bool
+	IsHybrid   bool
+	Vehicle    Vehicle
+}
+
+func (v Vehicle) showDetails() {
+	fmt.Println("number of passengers: ", v.NumberOfPassengers)
+	fmt.Println("Number of wheels: ", v.NumberOfWheels)
+}
+
+func (c CarComposition) show() {
+	fmt.Println("Make", c.Make)
+	fmt.Println("Model: ", c.Model)
+	fmt.Println("Year:", c.Year)
+	fmt.Println("Is Electric", c.IsElectric)
+	fmt.Println("Is Hybrid", c.IsHybrid)
+	c.Vehicle.showDetails()
+}
+
+func composition() {
+
+	suv := Vehicle{
+		NumberOfWheels:     4,
+		NumberOfPassengers: 6,
+	}
+
+	volvoXC90 := CarComposition{
+		Make:       "Volvo",
+		Model:      "XC90 T8",
+		Year:       2021,
+		IsElectric: false,
+		IsHybrid:   true,
+		Vehicle:    suv,
+	}
+
+	volvoXC90.show()
+}
