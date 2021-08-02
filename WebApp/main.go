@@ -30,7 +30,7 @@ func playRound(w http.ResponseWriter, r *http.Request) {
 
 func getPort() string {
 	port := os.Getenv("PORT")
-	log.Println("port", port)
+	log.Println("port" + port)
 	if port == "" {
 		return ":8080"
 	}
@@ -40,7 +40,7 @@ func getPort() string {
 func main() {
 	port := getPort()
 
-	log.Println("port", os.Getenv("PORT"))
+	log.Println("port" + os.Getenv("PORT"))
 	http.HandleFunc("/play", playRound)
 	http.HandleFunc("/", homePage)
 	log.Println("Starting web server on port" + port)
