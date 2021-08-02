@@ -19,10 +19,29 @@
         <br />
         <br />
 
-        <button class="btn btn-outline-secondary">Rock</button>
-        <button class="btn btn-outline-secondary">Paper</button>
-        <button class="btn btn-outline-secondary">Scissors</button>
+        <button class="btn btn-outline-secondary" onclick="choose(0)">Rock</button>
+        <button class="btn btn-outline-secondary" onclick="choose(1)">Paper</button>
+        <button class="btn btn-outline-secondary" onclick="choose(2)">Scissors</button>
     </div>
     
 </body>
+
+<script>
+async function choose(x) {
+    const response = await fetch(`/play?c=${x}`)
+    response.json().then(data => {
+        if (x === 0){
+            document.getElementById("player_choice").innerHTML = "Player chose ROCK"
+        } else if (x === 1) {
+            document.getElementById("player_choice").innerHTML = "Player chose PAPPER"
+        } else {
+            document.getElementById("player_choice").innerHTML = "Player chose SCISSORS"
+        }
+        document.getElementById("computer_choice").innerHTML = data.computerChoice
+        document.getElementById("round_result").innerHTML = data.roundResult
+    })
+    
+}
+</script>
+
 </html>
