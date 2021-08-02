@@ -30,6 +30,7 @@ func playRound(w http.ResponseWriter, r *http.Request) {
 
 func getPort() string {
 	port := os.Getenv("PORT")
+	log.Println("port", port)
 	if port == "" {
 		return ":8080"
 	}
