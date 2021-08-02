@@ -40,6 +40,7 @@ func getPort() string {
 func main() {
 	port := getPort()
 
+	log.Println("port", os.Getenv("PORT"))
 	http.HandleFunc("/play", playRound)
 	http.HandleFunc("/", homePage)
 	log.Println("Starting web server on port" + port)
