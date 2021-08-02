@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"webapp/rps"
 )
@@ -27,11 +28,21 @@ func playRound(w http.ResponseWriter, r *http.Request) {
 	w.Write(out)
 }
 
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return ":8080"
+	}
+	return ":" + port
+}
+
 func main() {
+	port := getPort()
+
 	http.HandleFunc("/play", playRound)
 	http.HandleFunc("/", homePage)
-	log.Println("Starting web server on port 8080")
-	http.ListenAndServe(":8080", nil)
+	log.Println("Starting web server on port" + port)
+	http.ListenAndServe(port, nil)
 }
 
 func renderTemplate(w http.ResponseWriter, page string) {
